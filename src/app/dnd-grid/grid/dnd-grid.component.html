@@ -1,0 +1,32 @@
+<div class="dnd-grid"
+  [class.invalid-dropzone]="isDropZoneInvalid | async"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  #grid>
+
+  <div *ngFor="let cell of cells | async; trackBy: trackCell" class="cell"
+    [style.grid-row-start]="cell.rowPosition"
+    [style.grid-column-start]="cell.colPosition"
+    [class.highlighted]="cell.isHighlighted">
+  </div>
+
+  <div *ngFor="let widget of widgets | async; trackBy: trackWidget" class="widget-cell" draggable="true"
+    [style.grid-row-start]="widget.box.rowPosition"
+    [style.grid-column-start]="widget.box.colPosition"
+    [style.grid-row-end]="'span ' + widget.box.rowSpan"
+    [style.grid-column-end]="'span ' + widget.box.colSpan"
+    [class.highlighted]="widget.isActive"
+    (dragstart)="onDragStart($event, widget)"
+    (dragend)="onDragEnd($event, widget)">
+    
+    <ng-template [ngTemplateOutlet]="widgetTemplate" [ngTemplateOutletContext]="{ $implicit: widget.type }"></ng-template>
+    <div class="horizontal-resize" draggable="true"
+      (dragstart)="onResizeHorizontalStart($event, widget)">...</div>
+    <div class="vertical-resize" draggable="true"
+      (dragstart)="onResizeVerticalStart($event, widget)">...</div>
+    <div class="diagonal-resize" draggable="true"
+      (dragstart)="onResizeDiagonalStart($event, widget)">⇲</div>
+  </div>
+  
+</div>

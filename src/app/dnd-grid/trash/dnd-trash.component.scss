@@ -1,0 +1,15 @@
+@import '../variables';
+
+:host {
+  display: flex;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.trash {
+  padding: 0.5em;
+
+  &.is-active {
+    background-color: $trashActiveColor;
+  }
+}

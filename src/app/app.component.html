@@ -1,0 +1,14 @@
+<div class="top">
+  <dnd-widget-types [widgetTypes]="widgetTypes" class="types">
+    <ng-template let-widgetType>
+      {{ widgetType.id }}
+    </ng-template>
+  </dnd-widget-types>
+  <dnd-trash class="trash"></dnd-trash>
+</div>
+
+<dnd-grid>
+  <ng-template let-widgetType>
+    {{ widgetType.id }}
+  </ng-template>
+</dnd-grid>

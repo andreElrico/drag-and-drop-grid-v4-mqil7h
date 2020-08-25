@@ -1,0 +1,6 @@
+<div *ngFor="let widgetType of widgetTypes" class="widget" draggable="true"
+  [class.highlighted]="widgetType.isActive"
+  (dragstart)="onDragStart($event, widgetType)"
+  (dragend)="onDragEnd($event, widgetType)">
+  <ng-template [ngTemplateOutlet]="widgetTypeTemplate" [ngTemplateOutletContext]="{ $implicit: widgetType }"></ng-template>
+</div>

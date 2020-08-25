@@ -1,0 +1,9 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+
+  .types {
+    flex-grow: 1;
+  }
+}

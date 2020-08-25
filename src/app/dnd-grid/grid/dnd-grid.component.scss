@@ -1,0 +1,85 @@
+@import '../variables';
+
+$outlineSize: 1px;
+
+.dnd-grid {
+  display: grid;
+  height: 600px;
+  border: 1px solid black;
+  padding: $gapSize;
+  grid-gap: $gapSize;
+  grid-template-rows: repeat($rowCount, 1fr);
+  grid-template-columns: repeat($colCount, 1fr);
+}
+
+.cell {
+  margin: -$gapSize;
+  border: $gapSize solid white;
+  outline: $outlineSize dashed ;
+  outline-offset: -($gapSize + $outlineSize);
+  grid-row-end: span 1;
+  grid-column-end: span 1;
+  pointer-events: none;
+
+  &.highlighted {
+    background-color: $validDropZoneColor;
+  }
+}
+
+.invalid-dropzone .cell.highlighted {
+  background-color: $invalidDropZoneColor;
+}
+
+.widget-cell {
+  position: relative;
+  border: 1px solid black;
+  grid-row-end: span 1;
+  grid-column-end: span 1;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.5em;
+  text-align: center;
+  cursor: move;
+
+  &.highlighted {
+    background-color: $widgetActiveColor;
+  }
+
+  .horizontal-resize, .vertical-resize, .diagonal-resize {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 500ms;
+  }
+
+  .horizontal-resize {
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 0.5em;
+    cursor: ew-resize;
+    writing-mode: vertical-lr;
+  }
+
+  .vertical-resize {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5em;
+    line-height: 0;
+    cursor: ns-resize;
+  }
+
+  .diagonal-resize {
+    right: 0;
+    bottom: 0;
+    width: 1em;
+    height: 1em;
+    text-align: right;
+    cursor: nwse-resize;
+  }
+
+  &:hover {
+    .horizontal-resize, .vertical-resize, .diagonal-resize {
+      opacity: 1;
+    }
+  }
+}
